@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matrix-Multiplikationsspiel</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matrix-Multiplikationsspiel</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Matrix Multiplikationsspiel">
+    <meta name="application-name" content="Matrix Multiplikationsspiel">
+    <meta name="description" content="Ein Spiel zur Übung der Multiplikation von Matrizen.">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Matrix-Multiplikationsspiel</h1>
+        <div class="matrix-container">
+            <div>
+                <div class="matrix-label">Matrix A</div>
+                <div class="matrix" id="matrixA"></div>
+            </div>
+            <div>
+                <div class="matrix-label">Matrix B</div>
+                <div class="matrix" id="matrixB"></div>
+            </div>
+        </div>
+        <form id="matrixForm">
+            <div>
+                <input type="text" class="input-field" id="answer00" placeholder="Antwort [0][0]">
+                <input type="text" class="input-field" id="answer01" placeholder="Antwort [0][1]">
+            </div>
+            <div>
+                <input type="text" class="input-field" id="answer10" placeholder="Antwort [1][0]">
+                <input type="text" class="input-field" id="answer11" placeholder="Antwort [1][1]">
+            </div>
+        </form>
+        <button id="submitButton" onclick="checkAnswer()">Absenden</button>
+        <div id="correct-message"></div>
+        <div id="wrong-message"></div>
+        <div id="score">Punktestand: 0</div>
+    </div>
+
+    <script>
+        let matrixA, matrixB, correctAnswers, score = 0;
+
+        // Punktestand aus dem lokalen Speicher laden, wenn die Seite geladen wird.
+        if (localStorage.getItem('score') !== null) {
+            score = parseInt(localStorage.getItem('score'));
+            document.getElementById("score").textContent = `Punktestand: ${score}`;
+        }
+
+        function generateMatrix() {
+            const rows = 2;
+            const cols = 2;
+            matrixA = generateRandomMatrix(rows, cols);
+            matrixB = generateRandomMatrix(cols, rows);
+            correctAnswers = multiplyMatrices(matrixA, matrixB);
+            console.log("Richtige Antwort: ", correctAnswers);
+        }
+
+        function generateRandomMatrix(rows, cols) {
+            const matrix = [];
+            for (let i = 0; i < rows; i++) {
+                const row = [];
+                for (let j = 0; j < cols; j++) {
+                    row.push(Math.floor(Math.random() * 10));
+                }
+                matrix.push(row);
+            }
+            return matrix;
+        }
+
+        function multiplyMatrices(matrixA, matrixB) {
+            const rowsA = matrixA.length;
+            const colsA = matrixA[0].length;
+            const rowsB = matrixB.length;
+            const colsB = matrixB[0].length;
+            if (colsA !== rowsB) {
+                throw new Error("Inkompatible Matrizen für die Multiplikation");
+            }
+            const result = [];
+            for (let i = 0; i < rowsA; i++) {
+                result[i] = [];
+                for (let j = 0; j < colsB; j++) {
+                    result[i][j] = 0;
+                    for (let k = 0; k < colsA; k++) {
+                        result[i][j] += matrixA[i][k] * matrixB[k][j];
+                    }
+                }
+            }
+            return result;
+        }
+
+        function displayMatrix(matrix, elementId) {
+            const div = document.getElementById(elementId);
+            div.innerHTML = matrix.map(row => row.join(' ')).join('<br>');
+        }
+
+        function checkAnswer() {
+            document.getElementById("submitButton").disabled = true;
+
+            const userAnswers = [];
+            for (let i = 0; i < 2; i++) {
+                userAnswers.push([]);
+                for (let j = 0; j < 2; j++) {
+                    const inputId = `answer${i}${j}`;
+                    const userInput = parseInt(document.getElementById(inputId).value);
+                    userAnswers[i].push(userInput);
+                }
+            }
+
+            const isCorrect = userAnswers.toString() === correctAnswers.toString();
+            if (isCorrect) {
+                document.getElementById("correct-message").textContent = "Richtig!";
+                document.getElementById("wrong-message").textContent = "";
+                score++;
+                document.getElementById("score").textContent = `Punktestand: ${score}`;
+                localStorage.setItem('score', score.toString());
+
+                setTimeout(() => {
+                    document.getElementById("correct-message").textContent = "";
+                    generateMatrix();
+                    displayMatrix(matrixA, "matrixA");
+                    displayMatrix(matrixB, "matrixB");
+                    resetInputFields();
+                    document.getElementById("submitButton").disabled = false;
+                }, 1000);
+            } else {
+                document.getElementById("wrong-message").textContent = "Falsch. Versuche es erneut.";
+                document.getElementById("correct-message").textContent = "";
+                resetInputFields();
+                document.getElementById("submitButton").disabled = false;
+            }
+        }
+
+        function resetInputFields() {
+            for (let i = 0; i < 2; i++) {
+                for (let j = 0; j < 2; j++) {
+                    const inputId = `answer${i}${j}`;
+                    document.getElementById(inputId).value = "";
+                }
+            }
+        }
+
+        generateMatrix();
+        displayMatrix(matrixA, "matrixA");
+        displayMatrix(matrixB, "matrixB");
+    </script>
+
+    <script>
+        // Überprüfen, ob die App bereits installiert ist
+        window.addEventListener('appinstalled', (evt) => {
+            // Deaktiviert die Installations-Schaltfläche, wenn die App installiert ist
+            document.getElementById('installButton').disabled = true;
+        });
+        let deferredPrompt;
+        let installButtonCreated = false;
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            // Verhindert das Standard-Browser-Installations-Popup
+            e.preventDefault();
+
+            // Speichert das Ereignis für spätere Verwendung
+            deferredPrompt = e;
+
+            // Zeigen die benutzerdefinierte Installations-Schaltfläche an oder fordert den Benutzer zur Installation auf
+            if (!installButtonCreated) {
+                const installButton = document.createElement('button');
+                installButton.textContent = 'PWA installieren';
+                installButton.id = 'installButton'; // Geben Sie der Schaltfläche eine ID für die Gestaltung
+                installButton.addEventListener('click', () => {
+                    // Zeigen das Installations-Popup des Browsers an
+                    deferredPrompt.prompt();
+                    // Wartet auf die Antwort des Benutzers auf die Aufforderung
+                    deferredPrompt.userChoice.then((choiceResult) => {
+                        if (choiceResult.outcome === 'accepted') {
+                            console.log('Benutzer hat die PWA-Installation akzeptiert');
+                        } else {
+                            console.log('Benutzer hat die PWA-Installation abgelehnt');
+                        }
+                        // Setzen Sie die deferredPrompt-Variable zurück
+                        deferredPrompt = null;
+                    });
+                });
+
+                // Fügt Sie die Installations-Schaltfläche hinzu
+                document.body.appendChild(installButton);
+                installButtonCreated = true;
+            }
+        });
+
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('service-worker.js')
+                    .then(registration => console.log('Service Worker mit Geltungsbereich registriert:', registration.scope))
+                    .catch(error => console.error('Registrierung des Service Workers fehlgeschlagen:', error));
+            });
+        }
+    </script>
+</body>
+</html>

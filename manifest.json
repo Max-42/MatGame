@@ -1,0 +1,21 @@
+{
+    "name": "Matrix Multiplikationsspiel",
+    "short_name": "Matrix Spiel",
+    "icons": [
+      {
+        "src": "1902x192.png",
+        "sizes": "192x192",
+        "type": "image/png"
+      },
+        {
+            "src": "512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "start_url": "index.html",
+    "background_color": "#ffffff",
+    "theme_color": "#0277bd",
+    "display": "standalone"
+  }
+  
