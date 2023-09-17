@@ -115,3 +115,7 @@ h1 {
         margin-top: 20px;
     }
 }
+
+.wrong-answer {
+    border: 1px solid red;
+}
