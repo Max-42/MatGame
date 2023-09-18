@@ -192,6 +192,12 @@
 
                 // aktualisiert den Wert des Feldes mit der numerischen Version
                 this.value = numericValue;
+                try{
+                    this.classList.remove("wrong-answer");
+                }
+                catch(e){
+                    console.log("Keine falschen Antworten zu enfernen");
+                }
             });
         });
     </script>
