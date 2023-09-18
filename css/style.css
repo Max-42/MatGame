@@ -118,10 +118,10 @@ h1 {
 
 .wrong-answer {
     border: 1px solid red;
-    
+
 }
 
-.red-flash{
+.red-flash {
     background-color: red;
     animation: flash 0.5s alternate infinite;
 }
@@ -130,8 +130,8 @@ h1 {
     from {
         background-color: red;
     }
+
     to {
         background-color: transparent;
     }
 }
-
