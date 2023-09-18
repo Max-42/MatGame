@@ -1,4 +1,4 @@
-# MatGame
+# [MatGame](https://matgame.dyren.de/)
 
 Eine einfache PWA im Rahmen einer Hausaufgabe um Matrizenmultiplikation zu lernen.
 
