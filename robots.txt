@@ -1,0 +1,6 @@
+User-agent: cookiemonster
+Disallow: /cookies
+Allow: /
+
+User-agent: *
+Disallow:
