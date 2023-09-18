@@ -24,6 +24,18 @@
 <body>
     <div class="container">
         <h1>Max-Matrix-Multiplikationsspiel</h1>
+        <div id="shareIcon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-share" width="24" height="24"
+                viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M6 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"></path>
+                <path d="M18 6m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"></path>
+                <path d="M18 18m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"></path>
+                <path d="M8.7 10.7l6.6 -3.4"></path>
+                <path d="M8.7 13.3l6.6 3.4"></path>
+            </svg>
+        </div>
         <div class="matrix-container">
             <div>
                 <div class="matrix-label">Matrix A</div>
@@ -48,6 +60,13 @@
         <div id="correct-message"></div>
         <div id="wrong-message"></div>
         <div id="score">Punktestand: 0</div>
+
+        <div id="qrCodePopup">
+            <img src="./qr-code.png" alt="QR Code">
+            <button id="closePopup">Close</button>
+        </div>
+
+
     </div>
 
     <script>
@@ -192,10 +211,10 @@
 
                 // aktualisiert den Wert des Feldes mit der numerischen Version
                 this.value = numericValue;
-                try{
+                try {
                     this.classList.remove("wrong-answer");
                 }
-                catch(e){
+                catch (e) {
                     console.log("Keine falschen Antworten zu enfernen");
                 }
             });
@@ -251,6 +270,14 @@
                     .catch(error => console.error('Registrierung des Service Workers fehlgeschlagen:', error));
             });
         }
+        document.getElementById('shareIcon').addEventListener('click', function () {
+            document.getElementById('qrCodePopup').style.display = 'block';
+        });
+
+        document.getElementById('closePopup').addEventListener('click', function () {
+            document.getElementById('qrCodePopup').style.display = 'none';
+        });
+
     </script>
 </body>
 
