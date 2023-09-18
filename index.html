@@ -139,6 +139,7 @@
                 document.getElementById("correct-message").textContent = "";
 
                 // Makiere die falschen Antworten in rot und gibt ihn eine Flash animation
+                inputField.classList.remove("wrong-answer");
                 for (let i = 0; i < 2; i++) {
                     for (let j = 0; j < 2; j++) {
                         const inputId = `answer${i}${j}`;
@@ -146,10 +147,11 @@
                         if (userInput !== correctAnswers[i][j]) {
                             const inputField = document.getElementById(inputId);
                             inputField.classList.add("wrong-answer");
+                            inputField.classList.add("red-flash");
 
                             // Enferne die klasse nach 500ms
                             setTimeout(() => {
-                                inputField.classList.remove("wrong-answer");
+                                inputField.classList.remove("red-flash");
                             }, 500);
                         }
                     }
