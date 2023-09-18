@@ -16,7 +16,7 @@ body {
 
 h1 {
     font-size: 36px;
-    color: #007bff;
+    color: #0071F0;
 }
 
 .matrix-container {
@@ -69,7 +69,7 @@ h1 {
 }
 
 #submitButton {
-    background-color: #007bff;
+    background-color: #0071F0;
     color: #fff;
     border: none;
     padding: 12px 24px;
@@ -86,7 +86,7 @@ h1 {
 }
 
 #installButton {
-    background-color: #007bff;
+    background-color: #0071F0;
     color: #fff;
     border: none;
     padding: 12px 24px;
