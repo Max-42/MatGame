@@ -138,15 +138,19 @@
                 document.getElementById("wrong-message").textContent = "Falsch. Versuche es erneut.";
                 document.getElementById("correct-message").textContent = "";
 
-                // Mark the wrong answers in red
+                // Makiere die falschen Antworten in rot und gibt ihn eine Flash animation
                 for (let i = 0; i < 2; i++) {
                     for (let j = 0; j < 2; j++) {
                         const inputId = `answer${i}${j}`;
                         const userInput = parseInt(document.getElementById(inputId).value);
                         if (userInput !== correctAnswers[i][j]) {
-                            document.getElementById(inputId).classList.add("wrong-answer");
-                        } else {
-                            document.getElementById(inputId).classList.remove("wrong-answer");
+                            const inputField = document.getElementById(inputId);
+                            inputField.classList.add("wrong-answer");
+
+                            // Enferne die klasse nach 500ms
+                            setTimeout(() => {
+                                inputField.classList.remove("wrong-answer");
+                            }, 500);
                         }
                     }
                 }

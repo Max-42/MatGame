@@ -118,4 +118,16 @@ h1 {
 
 .wrong-answer {
     border: 1px solid red;
+    background-color: red;
+    animation: flash 0.5s alternate infinite;
 }
+
+@keyframes flash {
+    from {
+        background-color: red;
+    }
+    to {
+        background-color: transparent;
+    }
+}
+
