@@ -140,7 +140,12 @@
                 document.getElementById("correct-message").textContent = "";
 
                 // Makiere die falschen Antworten in rot und gibt ihn eine Flash animation
-                inputField.classList.remove("wrong-answer");
+                try {
+                    inputField.classList.remove("wrong-answer");
+                }
+                catch (e) {
+                    console.log("Keine falschen Antworten zu enfernen");
+                }
                 for (let i = 0; i < 2; i++) {
                     for (let j = 0; j < 2; j++) {
                         const inputId = `answer${i}${j}`;
@@ -175,6 +180,20 @@
         generateMatrix();
         displayMatrix(matrixA, "matrixA");
         displayMatrix(matrixB, "matrixB");
+
+        // Findet alle input-Felder
+        const inputFields = document.querySelectorAll('.input-field');
+
+        // Fügt die Eventlistener für jedes Feld hinzu
+        inputFields.forEach(inputField => {
+            inputField.addEventListener('input', function () {
+                // enferne alle nicht-numerischen Zeichen
+                const numericValue = this.value.replace(/[^0-9]/g, '');
+
+                // aktualisiert den Wert des Feldes mit der numerischen Version
+                this.value = numericValue;
+            });
+        });
     </script>
 
     <script>
