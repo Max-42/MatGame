@@ -1,6 +1,7 @@
 // service-worker.js
 
-const CACHE_NAME = 'matrix-game-cache-v4';
+const CACHE_VERSION = 'v5'; //todo UPDATE?
+const CACHE_NAME = `matrix-game-cache-${CACHE_VERSION}`;
 const urlsToCache = [
   '/',
   'index.html',
@@ -29,9 +30,28 @@ self.addEventListener('install', event => {
   );
 });
 
+self.addEventListener('activate', event => {
+  event.waitUntil(
+    caches.keys().then(cacheNames => {
+      return Promise.all(
+        cacheNames.map(cache => {
+          if (cache !== CACHE_NAME) {
+            return caches.delete(cache);
+          }
+        })
+      );
+    })
+  );
+});
+
 self.addEventListener('fetch', event => {
   event.respondWith(
     caches.match(event.request)
-      .then(response => response || fetch(event.request))
+      .then(response => {
+        if (response) {
+          return response;
+        }
+        return fetch(event.request);
+      })
   );
 });
