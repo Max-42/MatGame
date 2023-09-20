@@ -18,7 +18,8 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <meta name="theme-color" content="#0071F0">
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <script id="MathJax-script" async src="./assets/libraries/mathjax/es5/tex-chtml.js"></script>
 </head>
 
 <body>
@@ -63,7 +64,7 @@
         <div id="score">Punktestand: 0</div>
 
         <div id="qrCodePopup">
-            <img src="./qr-code.png" alt="QR Code">
+            <img src="./assets/images/qr.png" alt="QR Code">
             <button id="closePopup">Schließen</button>
         </div>
 
@@ -121,10 +122,34 @@
             return result;
         }
 
-        function displayMatrix(matrix, elementId) {
+        function displayMatrix(matrix, elementId, label) {
             const div = document.getElementById(elementId);
-            div.innerHTML = matrix.map(row => row.join(' ')).join('<br>');
+
+            let matrixHTML = `<div class="matrix-label">\\(${label}\\)`;
+
+            matrixHTML += ` = \\(\\begin{bmatrix}`;
+            for (let i = 0; i < matrix.length; i++) {
+                for (let j = 0; j < matrix[i].length; j++) {
+                    matrixHTML += matrix[i][j];
+                    if (j < matrix[i].length - 1) {
+                        matrixHTML += "&";
+                    }
+                }
+                if (i < matrix.length - 1) {
+                    matrixHTML += "\\\\";
+                }
+            }
+            matrixHTML += `\\end{bmatrix}\\)</div>`;
+
+            div.innerHTML = matrixHTML;
+
+            // Render LaTeX using MathJax
+            //MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
         }
+
+
+
+
 
         function checkAnswer() {
             document.getElementById("submitButton").disabled = true;
@@ -150,8 +175,8 @@
                 setTimeout(() => {
                     document.getElementById("correct-message").textContent = "";
                     generateMatrix();
-                    displayMatrix(matrixA, "matrixA");
-                    displayMatrix(matrixB, "matrixB");
+                    displayMatrix(matrixA, "matrixA", "A");
+                    displayMatrix(matrixB, "matrixB", "B");
                     resetInputFields();
                     document.getElementById("submitButton").disabled = false;
                 }, 1000);
@@ -198,8 +223,8 @@
         }
 
         generateMatrix();
-        displayMatrix(matrixA, "matrixA");
-        displayMatrix(matrixB, "matrixB");
+        displayMatrix(matrixA, "matrixA", "A");
+        displayMatrix(matrixB, "matrixB", "B");
 
         // Findet alle input-Felder
         const inputFields = document.querySelectorAll('.input-field');
