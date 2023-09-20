@@ -168,3 +168,8 @@ h1 {
   padding: 10px 20px;
   cursor: pointer;
 }
+
+.matrix-latex {
+    display: inline-block;
+    font-size: 1.2em;
+}
