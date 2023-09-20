@@ -135,38 +135,72 @@ h1 {
         background-color: transparent;
     }
 }
+
 #shareIcon {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  cursor: pointer;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    cursor: pointer;
+}
+
+#openLegal {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    cursor: pointer;
 }
 
 #qrCodePopup {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: #fff;
-  padding: 20px;
-  border: 2px solid #0071F0;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    padding: 20px;
+    border: 2px solid #0071F0;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: none;
 }
 
 #qrCodePopup img {
-  max-width: 100%;
-  height: auto;
+    max-width: 100%;
+    height: auto;
 }
 
 #closePopup {
-  display: block;
-  margin-top: 10px;
-  background-color: #0071F0;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
+    display: block;
+    margin-top: 10px;
+    background-color: #0071F0;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+
+
+#legalPopup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    padding: 20px;
+    border: 2px solid #0071F0;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: none;
+
+}
+
+
+#closeLegal {
+    display: block;
+    margin-top: 10px;
+    background-color: #0071F0;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
 }
 
 .matrix-latex {

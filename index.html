@@ -68,6 +68,21 @@
             <button id="closePopup">Schließen</button>
         </div>
 
+        <a id="openLegal">Rechtliches</a>
+
+        <div id="legalPopup">
+            <h3>Impressum</h3>
+            <p>Max Oppermann</p>
+            <p>Lindholz, 9</p>
+            <p>31139 Hildesheim</p>
+            <br>
+            <p>Icons von <a href="https://tablericons.com/" target="_blank">Tabler Icons</a></p>
+            <p>MathJax von <a href="https://www.mathjax.org/" target="_blank">MathJax</a></p>
+            <button id="closeLegal">Schließen</button>
+        </div>
+
+        
+
 
     </div>
 
@@ -302,6 +317,13 @@
 
         document.getElementById('closePopup').addEventListener('click', function () {
             document.getElementById('qrCodePopup').style.display = 'none';
+        });
+        document.getElementById('openLegal').addEventListener('click', function () {
+            document.getElementById('legalPopup').style.display = 'block';
+        });
+
+        document.getElementById('closeLegal').addEventListener('click', function () {
+            document.getElementById('legalPopup').style.display = 'none';
         });
 
     </script>
