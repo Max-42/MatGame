@@ -1,6 +1,6 @@
 // service-worker.js
 
-const CACHE_VERSION = 'v5'; //todo UPDATE?
+const CACHE_VERSION = 'v6'; //todo UPDATE?
 const CACHE_NAME = `matrix-game-cache-${CACHE_VERSION}`;
 const urlsToCache = [
   '/',
