@@ -1,6 +1,6 @@
 // service-worker.js
 
-const CACHE_VERSION = 'v6'; //todo UPDATE?
+const CACHE_VERSION = 'v7'; //todo UPDATE?
 const CACHE_NAME = `matrix-game-cache-${CACHE_VERSION}`;
 const urlsToCache = [
   '/',
@@ -12,6 +12,9 @@ const urlsToCache = [
   'assets/libraries/mathjax/es5/output/chtml/fonts/woff-v2/MathJax_Zero.woff',
   'assets/libraries/mathjax/es5/output/chtml/fonts/woff-v2/MathJax_Main-Regular.woff',
   'assets/libraries/mathjax/es5/output/chtml/fonts/woff-v2/MathJax_Main-Bold.woff',
+  'assets/libraries/mathjax/es5/output/chtml/fonts/woff-v2/MathJax_Math-Italic.woff',
+  'assets/libraries/mathjax/es5/output/chtml/fonts/woff-v2/MathJax_Size3-Regular.woff',
+
   // icons
   '192x192.png',
   '512x512.png',
