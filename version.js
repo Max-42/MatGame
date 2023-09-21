@@ -1,0 +1,1 @@
+const version = 8; //remember to change also in service-worker.js

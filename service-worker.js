@@ -1,6 +1,6 @@
 // service-worker.js
 
-const CACHE_VERSION = 'v7'; //todo UPDATE?
+const CACHE_VERSION = '8'; //todo UPDATE?
 const CACHE_NAME = `matrix-game-cache-${CACHE_VERSION}`;
 const urlsToCache = [
   '/',
@@ -58,3 +58,24 @@ self.addEventListener('fetch', event => {
       })
   );
 });
+
+// try to fetch version.js from server, update cache if it's newer and do not crash if it's not available
+self.addEventListener('message', event => {
+  if (event.data === 'updateCache') {
+    fetch('version.js')
+      .then(response => response.json())
+      .then(data => {
+        if (data.version > CACHE_VERSION) {
+          caches.open(CACHE_NAME)
+            .then(cache => cache.addAll(urlsToCache))
+            .then(() => self.skipWaiting());
+        }
+      })
+      .catch(() => {
+        console.log('version.js not available');
+      });
+  }
+});
+
+
+
