@@ -9,7 +9,7 @@ Eine einfache PWA im Rahmen einer Hausaufgabe um Matrizenmultiplikation zu lerne
 - Standalone version (Kann im eigenen Fenster gespielt werden)
 - 4 x 100 % Lighthouse + PWA
 
-![Screenshot-Mainpage](https://upload.oppisoft.de/x/4c5MQp9PtwdvzS4pK5th8.png)
+![Screenshot-Mainpage](https://upload.oppisoft.de/x/dUkc7SnAhE0s60MZUGfuh.png)
 
 ### Lighthouse
 
